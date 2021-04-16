@@ -14,14 +14,15 @@ const styles = StyleSheet.create({
 button: {
   borderRadius: 9,
   paddingVertical:15,
-  paddingHorizontal:'42.5%',
+  paddingHorizontal:'40%',
   backgroundColor:"#2E8B57",
+
 },
 buttonText: {
   color: 'white',
   fontWeight: 'bold',
   textTransform: 'uppercase',
-  fontSize: 16,
+  fontSize: 14,
   textAlign: 'center'
 }
 })
