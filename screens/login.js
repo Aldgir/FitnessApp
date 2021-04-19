@@ -1,82 +1,102 @@
-import React, {Component} from 'react';
-import {TextInput,TouchableOpacity,Text,View} from 'react-native';
-import {} from 'react-navigation';
+import React,{Component} from 'react';
+import {Text,View,Image, TextInput} from 'react-native';
+import Icon from '@expo/vector-icons/AntDesign';
 
-export class Login extends Component{
+export default class Login extends React.Component{
+
     render(){
+        const {navigate} = this.props.navigation
         return(
-            <View style ={styles.container}>
-                <View style = {styles.textfields}>
-                    <TextInput style = {styles.input}>
-                        placeholder = "username"
-                        returnKeyType = "next"
-                        onSubmitEditing = {() => this.passwordInput.focus()}
-                        keyboardType="email-address"
-                        autoCap="none"
-                        autoCorrect={false}
-                    </TextInput>
-                    <TextInput style = {styles.input}>
-                        placeholder = "password"
-                        returnKeyType = "go"
-                        secureTextEntry
-                        ref = {(input) => this.passwordInput.focus()}
-                    </TextInput>
-                    <TouchableOpacity style = {styles.buttoncontainer} onPress ={() =>this.props.navigation.navigate('Register')} >
-                       <Text style ={styles.buttontext}> Login </Text>
-                    </TouchableOpacity>
-                    <Button 
-                       title = "Register Here"
-                       color = "#C0392B"
-                       onPress = {() => this.props.navigation}
+            <View style={{backgroundColor:"#FFF",height:"100%"}}>
+                <Text
+                 style={{
+                     fontSize:30,
+                     marginTop:100,
+                     alignSelf:"center",
+                 }}
+                >Welcome!</Text>
+
+                <Text
+                style={{
+                    
+                    marginHorizontal:55,
+                    textAlign:'center',
+                    marginTop:5,
+                    opacity:0.4
+                }}
+                >
+                    Please login in order to use the application.
+                </Text>
+
+                <View style={{
+                    flexDirection:"row",
+                    alignItems:"center",
+                    marginHorizontal:55,
+                    borderWidth:2,
+                    marginTop:50,
+                    paddingHorizontal:10,
+                    borderColor:"#00716F",
+                    borderRadius:23,
+                    paddingVertical:2
+                }}>
+                    <Icon name="mail" color="#00716F" size={24}/>
+                    <TextInput 
+                        style={{paddingHorizontal:10}}
+                        placeholder= 'Enter Email'
                     />
+
+                    
+
                 </View>
+                <View style={{
+                    flexDirection:"row",
+                    alignItems:"center",
+                    marginHorizontal:55,
+                    borderWidth:2,
+                    marginTop:15,
+                    paddingHorizontal:10,
+                    borderColor:"#00716F",
+                    borderRadius:23,
+                    paddingVertical:2
+                }}>
+                    <Icon name="lock" color="#00716F" size={24}/>
+                    <TextInput 
+                        secureTextEntry
+                        style={{paddingHorizontal:10}}
+                        placeholder='Enter Password'
+                    />
+
+                    
+
+                </View>
+
+                <View style={{
+                    marginHorizontal:55,
+                    alignItems:"center",
+                    justifyContent:"center",
+                    marginTop:30,
+                    backgroundColor:"#00716F",
+                    paddingVertical:10,
+                    borderRadius:23
+                }}>
+                    <Text 
+                    onPress={()=>navigate('Main')}
+                    style={{
+                        color:"white",
+                    
+                    }}>Log in</Text>
+                </View>
+                <Text 
+                
+                onPress={()=>navigate('Register')}
+                
+                style={{
+                    alignSelf:"center",
+                    color:"#00716F",
+                   
+                    paddingVertical:30
+                }}>Dont have an account? Register Now</Text>
             </View>
         )
-    }
-}
-
-export default class App extends Component{
-    render(){
-        return(
-            <AppStackNavigator />
-        );
-    }
-}
-
-const AppStackNavigator = createStackNavigator ({
-    Login: login,
-    Register: register,
-    Home:WelcomeScreen
-});
-
-const styles ={
-    container:{
-        padding:20,
-        flex:1,
-        backgroundColor:'#C0392B',
-        justifyContent:'center',
-        alignItems:'stretch'
-    },
-    input:{
-        paddingLeft:20,
-        borderRadius:50,
-        height:50,
-        fontSize:25,
-        backgroundColor:'white',
-        borderColor:"#1abc9c",
-        borderWidth: 1,
-        marginBottom: 20,
-        color:'#34495e'
-    },
-    buttoncontainer:{
-        height:50,
-        borderRadius:50,
-        backgroundColor:'#1abc9c',
-        paddingVertical:10,
-        justifyContent: 'center'
-    },
-    buttontext:{
-        textAlign:'center',
-        color:'#ecf0f1'
     }
 }
