@@ -1,48 +1,72 @@
-import React,{Component} from 'react';
-import {StyleSheet,SafeAreaView, View,Text, Pressable} from 'react-native';
+import React,{Component,useState,useEffect} from 'react';
+import {StyleSheet,ScrollView, View,Text, TextInput,TouchableOpacity} from 'react-native';
 import Icon from '@expo/vector-icons/FontAwesome5';
-import { SearchBar } from 'react-native-elements';
+import{Header} from 'react-native-elements';
+import Food from '../custom/Nutrition';
+import { FlatList } from 'react-native';
 
 
-export default class Kitchen extends React.Component{
-   
+const Kitchen = ({}) => {
+    const APP_ID ='41500512';
+    const APP_KEY = '1bfc4fef2cf050625b31867f9ebbb897';
+    const[foods,setFoods] = useState([]);
+
+    const getFoods = async() => {
+        const response = await fetch(`https://api.edamam.com/api/food-database/v2/parser?ingr=red%20apple&app_id=${APP_ID}&app_key=${APP_KEY}`)
+        
+        const data = await response.json();
+
+        setFoods(data.hits)
+    };
     
-    render(){
-        const{navigate} = this.props.navigation
+   useEffect(() => {
+       getFoods();
+
+   },[]);
+
         return(
-            
+          <ScrollView showsVerticalScrollIndicatior={false}>
 
-         <SafeAreaView style={{
-             backgroundColor:'#00716F',
-         }}>
-
-         
-            <Pressable>
-         
-         <View
-         style={{
-                     fontSize:30,
-                     marginTop:'8%',
-                     alignSelf:'flex-start',
-                     
-                    
-                    }}
-         >
-          <Icon 
-          onPress={()=>navigate('Main')}
-          style={{
-                     justifyContent:'center',
-                     marginLeft:10,
-                     alignSelf:"flex-start",
-                    }}
-           name="arrow-left" color="#ffffff" size={40}/>
-         </View>
-       </Pressable>
-       
+          <View style={{
+              flexDirection:'column',
+          }}>
+              <Text style={{
+                fontSize:14,
+                fontWeight:"600",
+                alignSelf:"center",
+               
+               
+              }}>
+                  Log your food down below or see lists with food items
+              </Text>
 
 
-       </SafeAreaView>
-    
+              <TextInput style={styles.container} placeholder='search for food'
+                >
+                
+              </TextInput>
+          </View>
+          </ScrollView>
+          
         )
     }
-}
+
+    export default Kitchen;
+
+    const styles = StyleSheet.create({
+        background:{
+        flex:1,
+        alignItems:'center'
+      },
+      container:{
+        flexDirection:'row',
+        alignItems:'flex-start',
+            marginHorizontal:55,
+            borderWidth:2,
+            marginTop:30,
+            paddingHorizontal:50,
+            borderColor:"#00716F",
+            borderRadius:29,
+            paddingVertical:10,
+      }
+    });

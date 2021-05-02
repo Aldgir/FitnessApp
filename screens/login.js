@@ -1,11 +1,13 @@
-import React,{Component} from 'react';
-import {Text,View,Image, TextInput} from 'react-native';
+import React,{Component,useState,useContext} from 'react';
+import {Text,View,TextInput} from 'react-native';
 import Icon from '@expo/vector-icons/AntDesign';
+import {Authentication} from '../navigation/Authentication';
 
-export default class Login extends React.Component{
 
-    render(){
-        const {navigate} = this.props.navigation
+const Login = ({navigation}) =>{
+    const[email,setEmail] = useState();
+    const[password,setPassword] = useState();
+    const{login} = useContext(Authentication);
         return(
             <View style={{backgroundColor:"#FFF",height:"100%"}}>
                 <Text
@@ -42,7 +44,9 @@ export default class Login extends React.Component{
                     <Icon name="mail" color="#00716F" size={24}/>
                     <TextInput 
                         style={{paddingHorizontal:10}}
+                        onChangeText={(userEmail) =>setEmail(userEmail)}
                         placeholder= 'Enter Email'
+                        autoCapitalize = 'none'
                     />
 
                     
@@ -63,6 +67,7 @@ export default class Login extends React.Component{
                     <TextInput 
                         secureTextEntry
                         style={{paddingHorizontal:10}}
+                        onChangeText={(userPassword) =>setPassword(userPassword)}
                         placeholder='Enter Password'
                     />
 
@@ -80,7 +85,7 @@ export default class Login extends React.Component{
                     borderRadius:23
                 }}>
                     <Text 
-                    onPress={()=>navigate('Main')}
+                    onPress={() => login(email, password)}
                     style={{
                         color:"white",
                     
@@ -88,15 +93,16 @@ export default class Login extends React.Component{
                 </View>
                 <Text 
                 
-                onPress={()=>navigate('Register')}
-                
-                style={{
+                 onPress={() => navigation.navigate('Register')}
+                 style={{
                     alignSelf:"center",
                     color:"#00716F",
-                   
                     paddingVertical:30
                 }}>Dont have an account? Register Now</Text>
             </View>
         )
-    }
+    
 }
+
+
+export default Login;

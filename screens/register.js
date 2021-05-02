@@ -1,13 +1,27 @@
-import React,{Component} from 'react';
-import {Text,View,Image, TextInput} from 'react-native';
+import React,{Component,useState,useContext} from 'react';
+import {Text,View,TextInput,ScrollView} from 'react-native';
 import Icon from '@expo/vector-icons/FontAwesome5';
+import {Authentication} from '../navigation/Authentication';
+import 'firebase/auth';
+import 'firebase/firestore';
+import 'firebase/storage';
 
-export default class Register extends React.Component{
+const Register =({navigation}) =>{
+    const[email,setEmail]=useState();
+    const[password,setPassword]=useState();
+    const[confirmPassword,setConfirmPassword]=useState();
+    const[name,setName]=useState();
+    const[age,setAge]=useState();
+    const[weight,setWeight]=useState();
+    const[height,setHeight]=useState();
+    const[gender,setGender]=useState();
 
-    render(){
-        const {navigate} = this.props.navigation
+    const{register} = useContext(Authentication);
         return(
             <View style={{backgroundColor:"#FFF",height:"100%"}}>
+                <ScrollView>
+
+                
                 <Text
                  style={{
                      fontSize:30,
@@ -27,11 +41,7 @@ export default class Register extends React.Component{
                 >
                     You need an account to use the application.
                 </Text>
-             
 
-              
-
-            
                 <View style={{flexDirection:"row",
                     alignItems:"center",
                     marginHorizontal:55,
@@ -44,6 +54,7 @@ export default class Register extends React.Component{
                     <Icon name="user" color="#00716F" size={24}/>
                     <TextInput 
                         placeholder="Name"
+                        onChangeText={(userName) => setName(userName)}
                         placeholderTextColor="#00716F"
                         style={{paddingHorizontal:10}}
                     />
@@ -59,10 +70,11 @@ export default class Register extends React.Component{
                     borderColor:"#00716F",
                     borderRadius:23,
                     paddingVertical:2}}>
-                    <Icon name="weight" color="#00716F" size={24}/>
+                    <Icon name="weight" color="#00716A" size={24}/>
                     <TextInput 
                         placeholder="Weight - kg"
-                        placeholderTextColor="#00716F"
+                        onChangeText={(userWeight) => setWeight(userWeight)}
+                        placeholderTextColor="#00716A"
                         style={{paddingHorizontal:15}}
                     />
                     
@@ -73,13 +85,14 @@ export default class Register extends React.Component{
                     borderWidth:2,
                     marginTop:15,
                     paddingHorizontal:10,
-                    borderColor:"#00716F",
+                    borderColor:"#00716A",
                     borderRadius:23,
                     paddingVertical:2}}>
-                    <Icon name="arrows-alt-v" color="#00716F" size={24}/>
+                    <Icon name="arrows-alt-v" color="#00716A" size={24}/>
                     <TextInput 
                         placeholder="Height - cm"
-                        placeholderTextColor="#00716F"
+                        onChangeText={(userHeight) => setHeight(userHeight)}
+                        placeholderTextColor="#00716A"
                         style={{paddingHorizontal:15}}
                     />
                     
@@ -90,13 +103,14 @@ export default class Register extends React.Component{
                     borderWidth:2,
                     marginTop:15,
                     paddingHorizontal:10,
-                    borderColor:"#00716F",
+                    borderColor:"#00716A",
                     borderRadius:23,
                     paddingVertical:2}}>
-                    <Icon name="calendar-day" color="#00716F" size={24}/>
+                    <Icon name="calendar-day" color="#00716A" size={24}/>
                     <TextInput 
                         placeholder="Age"
-                        placeholderTextColor="#00716F"
+                        onChangeText={(userAge) => setAge(userAge)}
+                        placeholderTextColor="#00716A"
                         style={{paddingHorizontal:10}}
                     />
                     
@@ -107,13 +121,14 @@ export default class Register extends React.Component{
                     borderWidth:2,
                     marginTop:15,
                     paddingHorizontal:10,
-                    borderColor:"#00716F",
+                    borderColor:"#00716A",
                     borderRadius:23,
                     paddingVertical:2}}>
-                    <Icon name="venus-mars" color="#00716F" size={24}/>
+                    <Icon name="venus-mars" color="#00716A" size={24}/>
                     <TextInput 
-                        placeholder="Sex"
-                        placeholderTextColor="#00716F"
+                        placeholder="Gender"
+                        onChangeText={(userGender) => setGender(userGender)}
+                        placeholderTextColor="#00716A"
                         style={{paddingHorizontal:10}}
                     />
                     
@@ -124,13 +139,14 @@ export default class Register extends React.Component{
                     borderWidth:2,
                     marginTop:15,
                     paddingHorizontal:10,
-                    borderColor:"#00716F",
+                    borderColor:"#00716A",
                     borderRadius:23,
                     paddingVertical:2}}>
-                    <Icon name="envelope" color="#00716F" size={24}/>
+                    <Icon name="envelope" color="#00716A" size={24}/>
                     <TextInput 
                         placeholder="Email"
-                        placeholderTextColor="#00716F"
+                        onChangeText={(userEmail) => setEmail(userEmail)}
+                        placeholderTextColor="#00716A"
                         style={{paddingHorizontal:10}}
                     />
                 
@@ -143,14 +159,15 @@ export default class Register extends React.Component{
                     borderWidth:2,
                     marginTop:15,
                     paddingHorizontal:10,
-                    borderColor:"#00716F",
+                    borderColor:"#00716A",
                     borderRadius:23,
                     paddingVertical:2}}>
-                    <Icon name="lock" color="#00716F" size={24}/>
+                    <Icon name="lock" color="#00716A" size={24}/>
                    <TextInput 
                         secureTextEntry
                         placeholder="Password"
-                        placeholderTextColor="#00716F"
+                        onChangeText={(userPassword) => setPassword(userPassword)}
+                        placeholderTextColor="#00716A"
                         style={{paddingHorizontal:10}}
                     />
 
@@ -164,14 +181,15 @@ export default class Register extends React.Component{
                     borderWidth:2,
                     marginTop:15,
                     paddingHorizontal:10,
-                    borderColor:"#00716F",
+                    borderColor:"#00716A",
                     borderRadius:23,
                     paddingVertical:2}}>
-                    <Icon name="lock" color="#00716F" size={24}/>
+                    <Icon name="lock" color="#00716A" size={24}/>
                    <TextInput 
                         secureTextEntry
                         placeholder="Confirm Password"
-                        placeholderTextColor="#00716F"
+                        onChangeText={(userPassword) => setConfirmPassword(userPassword)}
+                        placeholderTextColor="#00716A"
                         style={{paddingHorizontal:10}}
                     />
                     
@@ -183,20 +201,20 @@ export default class Register extends React.Component{
                     alignItems:"center",
                     justifyContent:"center",
                     marginTop:30,
-                    backgroundColor:"#00716F",
+                    backgroundColor:"#00716A",
                     paddingVertical:10,
                     borderRadius:23
                 }}>
                     <Text
-                    onPress={()=>navigate('Login')}
+                     onPress={() => register(email, password,name,weight,height,age,gender)}
                     style={{
                         color:"white",
                         
                     }}>Register</Text>
                 </View>
-              
+                </ScrollView>
             </View>
         )
     }
-}
 
+    export default Register;
