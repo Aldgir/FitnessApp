@@ -1,0 +1,14 @@
+GitHub Repository link: https://github.com/Aldgir/FitnessApp
+
+instruction on how to run the code:
+Requirements: Nodejs
+
+1.Open a terminal windows and navigate to the location of the folder
+
+2.run npm install -g expo-cli and npm install to install all the required dependencies for the project
+
+3. run the expo start command, which will start the metro bundle in an internet browser page
+
+4. Get the expo go application on a smartphone
+
+5. connect to the expo local server by scanning the Qr code inside the expo go application

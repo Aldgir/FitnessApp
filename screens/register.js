@@ -2,9 +2,7 @@ import React,{Component,useState,useContext} from 'react';
 import {Text,View,TextInput,ScrollView} from 'react-native';
 import Icon from '@expo/vector-icons/FontAwesome5';
 import {Authentication} from '../navigation/Authentication';
-import 'firebase/auth';
-import 'firebase/firestore';
-import 'firebase/storage';
+import {auth,db,store} from '../firebase';
 
 const Register =({navigation}) =>{
     const[email,setEmail]=useState();
@@ -15,6 +13,7 @@ const Register =({navigation}) =>{
     const[weight,setWeight]=useState();
     const[height,setHeight]=useState();
     const[gender,setGender]=useState();
+    const[goal,setGoal]=useState();
 
     const{register} = useContext(Authentication);
         return(
@@ -142,6 +141,24 @@ const Register =({navigation}) =>{
                     borderColor:"#00716A",
                     borderRadius:23,
                     paddingVertical:2}}>
+                    <Icon name="star" color="#00716A" size={24}/>
+                    <TextInput 
+                        placeholder="Goal"
+                        onChangeText={(userGoal) => setGoal(userGoal)}
+                        placeholderTextColor="#00716A"
+                        style={{paddingHorizontal:10}}
+                    />
+                    
+                </View>
+                <View style={{flexDirection:"row",
+                    alignItems:"center",
+                    marginHorizontal:55,
+                    borderWidth:2,
+                    marginTop:15,
+                    paddingHorizontal:10,
+                    borderColor:"#00716A",
+                    borderRadius:23,
+                    paddingVertical:2}}>
                     <Icon name="envelope" color="#00716A" size={24}/>
                     <TextInput 
                         placeholder="Email"
@@ -206,7 +223,7 @@ const Register =({navigation}) =>{
                     borderRadius:23
                 }}>
                     <Text
-                     onPress={() => register(email, password,name,weight,height,age,gender)}
+                     onPress={() => register(email, password,name,weight,height,age,gender,goal)}
                     style={{
                         color:"white",
                         

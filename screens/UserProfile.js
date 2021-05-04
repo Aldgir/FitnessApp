@@ -104,8 +104,8 @@ const UserProfile = ({navigation, route}) => {
           }}>
           
            <Image style={{
-            height: 125,
-            width: 125,
+            height: 155,
+            width: 155,
             borderRadius: 60,
             
          }}

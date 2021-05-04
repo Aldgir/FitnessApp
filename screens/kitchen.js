@@ -12,17 +12,13 @@ const Kitchen = ({}) => {
     const[foods,setFoods] = useState([]);
 
     const getFoods = async() => {
-        const response = await fetch(`https://api.edamam.com/api/food-database/v2/parser?ingr=red%20apple&app_id=${APP_ID}&app_key=${APP_KEY}`)
+        const response = await fetch(`https://api.edamam.com/api/food-database/v2/parser?ingr=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`)
         
         const data = await response.json();
 
         setFoods(data.hits)
     };
-    
-   useEffect(() => {
-       getFoods();
-
-   },[]);
+  
 
         return(
           <ScrollView showsVerticalScrollIndicatior={false}>
